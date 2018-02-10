@@ -1,6 +1,6 @@
 module Exercise05 exposing (decoder)
 
-import Json.Decode exposing (fail, Decoder)
+import Json.Decode exposing (fail, Decoder, map2, string, int, at)
 
 
 {- Now that you know how to create a decoder which includes calling a function
@@ -28,7 +28,7 @@ import Json.Decode exposing (fail, Decoder)
 
 decoder : Decoder String
 decoder =
-    fail "Implement me!"
+    map2 (String.repeat) (at [ "repeat" ] int) (at [ "term" ] string)
 
 
 

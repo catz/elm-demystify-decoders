@@ -29,7 +29,18 @@ type Color
 
 decoder : String -> Decoder Color
 decoder colorString =
-    fail <| "I don't know a color named " ++ colorString
+    case colorString of
+        "red" ->
+            succeed Red
+
+        "green" ->
+            succeed Green
+
+        "blue" ->
+            succeed Blue
+
+        _ ->
+            fail <| "I don't know a color named " ++ colorString
 
 
 

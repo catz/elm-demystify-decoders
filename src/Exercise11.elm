@@ -1,6 +1,6 @@
 module Exercise11 exposing (decoder)
 
-import Json.Decode exposing (Decoder, fail)
+import Json.Decode exposing (Decoder, fail, oneOf, int, list, andThen, map, at, succeed)
 
 
 {- Every once in a while, you'll have to deal with oddly structured data. Let's
@@ -29,7 +29,16 @@ import Json.Decode exposing (Decoder, fail)
 
 decoder : Decoder (List Int)
 decoder =
-    fail "Implement me!"
+    let
+        intDecoder =
+            succeed << List.singleton
+
+        -- intDecoder i =
+        --     succeed (List.singleton i)
+        listOrIntDecoder =
+            oneOf [ list int, int |> andThen intDecoder ]
+    in
+        (at [ "number" ] listOrIntDecoder)
 
 
 
